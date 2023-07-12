@@ -1,0 +1,27 @@
+// 2. This code loads the IFrame Player API code asynchronously.
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+function onYouTubeIframeAPIReady() {
+  new YT.Player('player', {
+    // 위쪽의 player은 <div id="player"></div>의 player를 가리키는 것
+    videoId: 'An6LvWQuj_8',  //최초 재생할 유튜브 영상 ID
+    //링크로 재생시킬 수도 있지만 제어하기에는 videoid가 더 적절함
+    playerVars: {
+      autoplay: true, //자동 재생 유무
+      loop : true, //반복 재생 유무
+      //만약 반복 재생여부를 true로 했을 경우 playlist를 지정해야
+      playlist: 'An6LvWQuj_8' //반복 재생할 유튜브 영상 id 선택
+    },
+    events:{
+      onReady: function(event){
+        event.target.mute() //음소거
+      }
+    }
+  });
+}
